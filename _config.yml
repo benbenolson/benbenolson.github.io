@@ -1,10 +1,10 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title:       Ben Olson's Blog
+email:       molson5@vols.utk.edu
+author:      Ben Olson
+description: "A small blog for posting interesting things that I find in my memory management research, mostly for my own benefit."
 baseurl:     ""
-url:         "http://pixyll.com"
+url:         ""
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md
@@ -26,7 +26,6 @@ show_post_footers:    false
 show_social_icons:    false
 ajaxify_contact_form: false
 enable_mathjax: false
-extended_fonts: false
 enable_anchorjs: false
 # Preview image for social media aka og:image and twitter:image
 post_preview_image: false

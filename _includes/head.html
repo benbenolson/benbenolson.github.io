@@ -26,14 +26,10 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ "/css/pixyll.css" | relative_url }}?{{ site.time | date: "%Y%m%d%H%M" }}" type="text/css">
 
-    <!-- Fonts -->
-    {% if site.extended_fonts %}
-    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&amp;subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Lato:900,300&amp;subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-    {% else %}
-    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
-    {% endif %}
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amiri&display=swap" rel="stylesheet">
+
     {% if site.show_social_icons or site.show_sharing_icons %}
       <link href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     {% endif %}
