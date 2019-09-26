@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Memory Alignment Bug
+title:      Alignment Bug
 date:       2019-09-13
 summary:    A rare bug, related to allocating aligned memory, that took a while to debug.
 categories: jekyll
@@ -36,28 +36,29 @@ I've added my own comments:
 
 {% highlight C %}
 
-  /* Do  the initial allocation */
-	ret = mmap(new_addr, size, PROT_READ | PROT_WRITE, mmflags, sa->fd, sa->size);
+/* Do  the initial allocation */
+ret = mmap(new_addr, size, PROT_READ | PROT_WRITE, mmflags, sa->fd, sa->size);
 
-  /* Check if the allocation meets the alignment */
-	if (alignment == 0 || ((uintptr_t) ret)%alignment == 0) {
-		goto success;
-	}
+/* Check if the allocation meets the alignment */
+if (alignment == 0 || ((uintptr_t) ret)%alignment == 0) {
+  goto success;
+}
 
-  /* If it's not aligned properly, unmap and try again with a larger size */
-	munmap(ret, size);
-	size += alignment;
-	ret = mmap(NULL, size, PROT_READ | PROT_WRITE, mmflags, sa->fd, sa->size);
+/* If it's not aligned properly, unmap and try again with a larger size */
+munmap(ret, size);
+size += alignment;
+ret = mmap(NULL, size, PROT_READ | PROT_WRITE, mmflags, sa->fd, sa->size);
 
-  /* Chop off and unmap the excess */
-	n = (uintptr_t) ret;
-	m = n + alignment - (n%alignment);
-	munmap(ret, m-n);
-	ret = (void *) m;
+/* Chop off and unmap the excess */
+n = (uintptr_t) ret;
+m = n + alignment - (n%alignment);
+munmap(ret, m-n);
+ret = (void *) m;
 
-  /* Finally, call 'mbind' on the new extent */
+/* Finally, call 'mbind' on the new extent */
 success:
-	mbind(ret, size, mpol, nodemaskp, maxnode, MPOL_MF_MOVE) < 0);
+mbind(ret, size, mpol, nodemaskp, maxnode, MPOL_MF_MOVE) < 0);
+
 {% endhighlight %}
 
 For several years, this worked for a variety of applications and never threw
