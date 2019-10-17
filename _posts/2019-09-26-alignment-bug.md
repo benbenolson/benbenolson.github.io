@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Alignment Bug
-date:       2019-09-13
+date:       2019-09-26
 summary:    A rare bug, related to allocating aligned memory, that took a while to debug.
 categories: jekyll
 ---
